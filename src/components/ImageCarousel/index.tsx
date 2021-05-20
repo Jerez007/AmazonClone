@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {
   View,
   Text,
@@ -8,9 +8,16 @@ import {
   useWindowDimensions,
 } from 'react-native';
 
-const ImageCarousel = ({images}: {images: [string]}) => {
+const ImageCarousel = ({images}: {images: string[]}) => {
   const windowWidth = useWindowDimensions().width;
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const onFlatListUpdate = useCallback(({viewableItems}) => {
+    if (viewableItems.length > 0) {
+      setActiveIndex(viewableItems[0].index || 0);
+    }
+    console.log(viewableItems);
+  }, []);
 
   return (
     <View style={styles.root}>
@@ -30,7 +37,7 @@ const ImageCarousel = ({images}: {images: [string]}) => {
         viewabilityConfig={{
           viewAreaCoveragePercentThreshold: 50,
         }}
-        onViewableItemsChanged={({viewableItems}) => {}}
+        onViewableItemsChanged={onFlatListUpdate}
       />
 
       <View style={styles.dots}>
@@ -38,7 +45,7 @@ const ImageCarousel = ({images}: {images: [string]}) => {
           <View
             style={[
               styles.dot,
-              {backgroundColor: index == activeIndex ? '#c9c9c9' : '#ededed'},
+              {backgroundColor: index === activeIndex ? '#c9c9c9' : '#ededed'},
             ]}
           />
         ))}
@@ -57,6 +64,7 @@ const styles = StyleSheet.create({
   dots: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   dot: {
     width: 10,
