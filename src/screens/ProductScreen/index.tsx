@@ -5,6 +5,7 @@ import styles from './styles';
 import product from '../../data/product';
 import QuantitySelector from '../../components/QuantitySelector';
 import Button from '../../components/Button';
+import ImageCarousel from '../../components/ImageCarousel';
 
 const ProductSreen = () => {
   const [selectedOption, setSelectedOption] = useState(
@@ -13,10 +14,11 @@ const ProductSreen = () => {
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <View>
+    <View style={styles.root}>
       <Text style={styles.title}>{product.title}</Text>
 
       {/* image carousel */}
+      <ImageCarousel images={product.images} />
 
       {/* option selector */}
       <Picker
@@ -47,6 +49,7 @@ const ProductSreen = () => {
         onPress={() => {
           console.warn('Add to cart');
         }}
+        containerStyles={{backgroundColor: '#f19941'}}
       />
       <Button
         text={'Buy Now'}
