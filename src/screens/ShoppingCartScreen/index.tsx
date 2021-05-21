@@ -1,16 +1,15 @@
 import React from 'react';
 import {View, StyleSheet, FlatList} from 'react-native';
-import ProductItem from '../../components/ProductItem';
-import QuantitySelector from '../../components/QuantitySelector';
+import CartProductItem from '../../components/CartProductItem';
 
 import products from '../../data/cart';
 
-const HomeScreen = () => {
+const ShoppingCartScreen = () => {
   return (
     <View style={styles.page}>
       <FlatList
         data={products}
-        renderItem={({item}) => <ProductItem item={item.item} />}
+        renderItem={({item}) => <CartProductItem cartItem={item} />}
         showsVerticalScrollIndicator={false}
       />
     </View>
@@ -23,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default ShoppingCartScreen;
