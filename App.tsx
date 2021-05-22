@@ -12,6 +12,7 @@ import React from 'react';
 import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import AddressScreen from './src/screens/AddressScreen';
 import ShoppingCartScreen from './src/screens/ShoppingCartScreen';
 
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ShoppingCartScreen />
+      <AddressScreen />
     </SafeAreaView>
   );
 };
