@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     textDecorationLine: 'line-through',
   },
+  quantityContainer: {
+    marginVertical: 10,
+    marginLeft: 30,
+  },
 });
 
 export default styles;

@@ -26,8 +26,8 @@ const CartProductItem = ({cartItem}: CartProductItemProps) => {
   const [quantity, setQuantity] = useState(quantityProp);
 
   return (
-    <View>
-      <View style={styles.root}>
+    <View style={styles.root}>
+      <View style={styles.row}>
         <Image style={styles.image} source={{uri: item.image}} />
 
         <View style={styles.rightContainer}>
@@ -56,7 +56,9 @@ const CartProductItem = ({cartItem}: CartProductItemProps) => {
           </Text>
         </View>
       </View>
-      <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+      <View style={styles.quantityContainer}>
+        <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+      </View>
     </View>
   );
 };
