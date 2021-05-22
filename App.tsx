@@ -10,11 +10,9 @@
 
 import React from 'react';
 import 'react-native-gesture-handler';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {StatusBar, useColorScheme, View} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import AddressScreen from './src/screens/AddressScreen';
-import ShoppingCartScreen from './src/screens/ShoppingCartScreen';
 import Router from './src/router';
 
 const App = () => {
@@ -22,13 +20,14 @@ const App = () => {
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    flex: 1,
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <View style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Router />
-    </SafeAreaView>
+    </View>
   );
 };
 
