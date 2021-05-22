@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Alert,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import countryList from 'country-list';
 import styles from './styles';
@@ -39,69 +47,73 @@ const AddressScreen = () => {
   };
 
   return (
-    <View style={styles.root}>
-      <View style={styles.row}>
-        <Picker selectedValue={country} onValueChange={setCountry}>
-          {countries.map(country => (
-            <Picker.Item value={country.code} label={country.name} />
-          ))}
-        </Picker>
-      </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 10 : 0}>
+      <ScrollView style={styles.root}>
+        <View style={styles.row}>
+          <Picker selectedValue={country} onValueChange={setCountry}>
+            {countries.map(country => (
+              <Picker.Item value={country.code} label={country.name} />
+            ))}
+          </Picker>
+        </View>
 
-      {/* Full name */}
-      <View style={styles.row}>
-        <Text style={styles.label}>Full name (First and Last name)</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Full name"
-          value={fullName}
-          onChangeText={setFullName}
-        />
-      </View>
+        {/* Full name */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Full name (First and Last name)</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Full name"
+            value={fullName}
+            onChangeText={setFullName}
+          />
+        </View>
 
-      {/* Phone Number */}
-      <View style={styles.row}>
-        <Text style={styles.label}>Phone number</Text>
-        <TextInput
-          keyboardType={'phone-pad'}
-          style={styles.input}
-          placeholder="Phone number"
-          value={phone}
-          onChangeText={setPhone}
-        />
-      </View>
+        {/* Phone Number */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Phone number</Text>
+          <TextInput
+            keyboardType={'phone-pad'}
+            style={styles.input}
+            placeholder="Phone number"
+            value={phone}
+            onChangeText={setPhone}
+          />
+        </View>
 
-      {/* Address */}
-      <View style={styles.row}>
-        <Text style={styles.label}>Address</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Address"
-          value={address}
-          onChangeText={text => {
-            setAddress(text);
-            setAddressError('');
-          }}
-          onEndEditing={validateAddress}
-        />
-        {!!addressError && (
-          <Text style={styles.errorLabel}>{addressError}</Text>
-        )}
-      </View>
+        {/* Address */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Address</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Address"
+            value={address}
+            onChangeText={text => {
+              setAddress(text);
+              setAddressError('');
+            }}
+            onEndEditing={validateAddress}
+          />
+          {!!addressError && (
+            <Text style={styles.errorLabel}>{addressError}</Text>
+          )}
+        </View>
 
-      {/* City */}
-      <View style={styles.row}>
-        <Text style={styles.label}>City</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="City"
-          value={city}
-          onChangeText={setCity}
-        />
-      </View>
+        {/* City */}
+        <View style={styles.row}>
+          <Text style={styles.label}>City</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="City"
+            value={city}
+            onChangeText={setCity}
+          />
+        </View>
 
-      <Button text="Checkout" onPress={onCheckout} />
-    </View>
+        <Button text="Checkout" onPress={onCheckout} />
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
