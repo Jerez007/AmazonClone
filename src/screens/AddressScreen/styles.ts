@@ -4,7 +4,9 @@ const styles = StyleSheet.create({
   root: {
     padding: 10,
   },
-  row: {},
+  row: {
+    marginVertical: 5,
+  },
   label: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -17,6 +19,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'lightgrey',
     borderRadius: 2,
+  },
+  errorLabel: {
+    color: 'red',
   },
 });
 
