@@ -19,6 +19,11 @@ const AddressScreen = () => {
   console.log(fullName);
 
   const onCheckout = () => {
+    if (addressError) {
+      Alert.alert('Fix all field errors before submitting');
+      return;
+    }
+
     if (!fullName) {
       Alert.alert('Please enter your Full name');
       return;
