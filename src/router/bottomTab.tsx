@@ -12,7 +12,7 @@ const BottomTabNav = () => {
       tabBarOptions={{
         showLabel: false,
         inactiveTintColor: '#e47911',
-        activeBackgroundColor: '#ffbd7d',
+        activeTintColor: '#ffbd7d',
       }}>
       <Tab.Screen
         component={HomeScreen}
@@ -28,7 +28,7 @@ const BottomTabNav = () => {
         name="profile"
         options={{
           tabBarIcon: ({color}) => (
-            <Entypo name="home" color={color} size={25} />
+            <Entypo name="user" color={color} size={25} />
           ),
         }}
       />
@@ -37,7 +37,7 @@ const BottomTabNav = () => {
         name="shoppingCart"
         options={{
           tabBarIcon: ({color}) => (
-            <Entypo name="home" color={color} size={25} />
+            <Entypo name="shopping-cart" color={color} size={25} />
           ),
         }}
       />
@@ -46,7 +46,7 @@ const BottomTabNav = () => {
         name="more"
         options={{
           tabBarIcon: ({color}) => (
-            <Entypo name="home" color={color} size={25} />
+            <Entypo name="menu" color={color} size={25} />
           ),
         }}
       />
