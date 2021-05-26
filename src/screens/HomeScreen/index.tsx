@@ -5,7 +5,9 @@ import QuantitySelector from '../../components/QuantitySelector';
 
 import products from '../../data/cart';
 
-const HomeScreen = () => {
+const HomeScreen = ({searchValue}: {searchValue: string}) => {
+  console.log(searchValue);
+
   return (
     <View style={styles.page}>
       <FlatList
