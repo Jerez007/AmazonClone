@@ -1,0 +1,12 @@
+type Product @model {
+  id: ID!
+  title: String!
+  description: String
+  image: String!
+  images: [String!]!
+  options: [String!]
+  avgRating: Float
+  ratings: Integer
+  price: Float!
+  oldPrice: Float
+}
