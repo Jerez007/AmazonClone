@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, FlatList, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Text,
+  ActivityIndicatorBase,
+  ActivityIndicator,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../../components/Button';
 import CartProductItem from '../../components/CartProductItem';
@@ -16,15 +23,19 @@ const ShoppingCartScreen = () => {
 
   useEffect(() => {
     const fetchCartProducts = async () => {
-      //TODO euqry only my cart items
+      //TODO query only my cart items
       DataStore.query(CartProduct).then(setCartProducts);
     };
     fetchCartProducts();
   }, []);
 
   useEffect(() => {
+    if (cartProducts.filter(cp => !cp.product).length === 0) {
+      return;
+    }
+
     const fetchProducts = async () => {
-      // query all products that are used in the cart
+      // query all products that are used in cart
       const products = await Promise.all(
         cartProducts.map(cartProduct =>
           DataStore.query(Product, cartProduct.productID),
@@ -32,23 +43,29 @@ const ShoppingCartScreen = () => {
       );
 
       // assign the products to the cart items
-      setCartProducts()
+      setCartProducts(currentCartProducts =>
+        currentCartProducts.map(cartProduct => ({
+          ...cartProduct,
+          product: products.find(p => p.id === cartProduct.productID),
+        })),
+      );
     };
-
     fetchProducts();
   }, [cartProducts]);
-
-  const totalPrice = 0;
-
-  // const totalPrice = cartProducts.reduce(
-  //   (summedPrice, product) =>
-  //     summedPrice + product.item.price * product.quantity,
-  //   0,
-  // );
 
   const onCheckout = () => {
     navigation.navigate('Address');
   };
+
+  if (cartProducts.filter(cp => !cp.product).length !== 0) {
+    return <ActivityIndicator />;
+  }
+
+  const totalPrice = cartProducts.reduce(
+    (summedPrice, product) =>
+      summedPrice + (product?.product?.price || 0) * product.quantity,
+    0,
+  );
 
   return (
     <View style={styles.page}>
