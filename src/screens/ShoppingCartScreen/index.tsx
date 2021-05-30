@@ -23,8 +23,12 @@ const ShoppingCartScreen = () => {
 
   useEffect(() => {
     const fetchCartProducts = async () => {
+      const userData = await Auth.currentAuthenticatedUser();
+
       //TODO query only my cart items
-      DataStore.query(CartProduct).then(setCartProducts);
+      DataStore.query(CartProduct, cp =>
+        cp.userSub('eq', userData.attributes.sub),
+      ).then(setCartProducts);
     };
     fetchCartProducts();
   }, []);
